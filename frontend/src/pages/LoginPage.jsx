@@ -1,8 +1,30 @@
 import { useState } from "react";
-import { Mail, Lock, UserPlus, LogIn, UserRound } from "lucide-react";
+import { Mail, Lock, UserPlus, LogIn, UserRound, Route } from "lucide-react";
 import { useAuth } from "../context/useAuth.js";
 import { useNavigate, useLocation } from "react-router-dom";
 import { usePageTitle } from "../hooks/usePageTitle.js";
+
+const Logo = () => (
+  <svg
+    viewBox="0 0 48 48"
+    width={36}
+    height={36}
+    aria-hidden="true"
+    className="text-[#203C5A]"
+  >
+    <rect width="48" height="48" rx="10" fill="#203C5A" />
+    <g transform="translate(24 24) scale(1.1) translate(-12 -12)">
+      <polygon
+        points="3 11 22 2 13 21 11 13 3 11"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
+  </svg>
+);
 
 export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -44,7 +66,10 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] p-5">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between py-2">
-        <div className="text-lg font-bold text-[#203C5A]">waymark</div>
+        <div className="flex items-center gap-2">
+          <Logo />
+          <span className="text-lg font-bold text-[#203C5A]">Waymark</span>
+        </div>
         <button
           type="button"
           onClick={() => {
@@ -63,6 +88,10 @@ export default function LoginPage() {
       <div className="flex min-h-[calc(100vh-76px)] items-center justify-center">
         <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8">
           <div className="mb-6 text-center">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Logo />
+              <span className="text-2xl font-semibold text-[#203C5A]">Waymark</span>
+            </div>
             <h1 className="text-2xl font-semibold">{isSignUp ? "Create account" : "Sign in"}</h1>
             <p className="mt-1 text-sm text-slate-500">
               {isSignUp ? "Start saving your journeys" : "Access your saved trips"}
