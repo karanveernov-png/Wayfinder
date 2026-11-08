@@ -1,0 +1,32 @@
+[
+  {
+    "id": "demo-alert-001",
+    "description": "[SIMULATED DEMO DATA \u2014 NOT a real incident report] Planned road maintenance on NH-95 near Sahnewal-Jandiali intersection. Single-lane traffic management in effect. Expect minor delays on approach to Ludhiana.",
+    "category": "road_works",
+    "severity": "moderate",
+    "location": {
+      "lat": 30.905,
+      "lon": 75.935
+    },
+    "source": "demo-data",
+    "retrieved_at": null,
+    "verified": false,
+    "relevance": "Demonstration alert \u2014 located on NH-95 approximately 7 km before Ludhiana. NOT a live report.",
+    "_demo_note": "FICTIONAL demonstration alert illustrating a plausible scenario for this corridor. Not a verified or traceable real-world report. Never present as a live traffic condition."
+  },
+  {
+    "id": "demo-alert-002",
+    "description": "[SIMULATED DEMO DATA \u2014 NOT a real incident report] Seasonal surface waterlogging reported by local commuters on the NH-95 approach to Ludhiana near Sahnewal. Exercise caution on wet road surfaces after rain.",
+    "category": "weather_advisory",
+    "severity": "low",
+    "location": {
+      "lat": 30.91,
+      "lon": 75.985
+    },
+    "source": "demo-data",
+    "retrieved_at": null,
+    "verified": false,
+    "relevance": "Demonstration alert \u2014 seasonal pattern on NH-95 western approach. NOT a live report.",
+    "_demo_note": "FICTIONAL demonstration alert illustrating a plausible scenario for this corridor. Not a verified or traceable real-world report. Never present as a live traffic condition."
+  }
+]

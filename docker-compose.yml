@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - .env.production
+    # Production-ready overrides (only applied when running via docker-compose up)
+    environment:
+      - APP_ENV=production
+      # Render exposes $HOST and $PORT automatically — fall back to 0.0.0.0:8000
+      # so the container is reachable on any interface.
+      - HOST=${HOST:-0.0.0.0}
+      - PORT=${PORT:-8000}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # These are baked into the built app at compile time — must point at
+        # your REAL deployed backend URL and Supabase project before building.
+        # Docker Compose reads them from .env.production first, then falls
+        # back to shell environment variables ($VITE_*) set in CI or your
+        # host machine.
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-https://your-backend.onrender.com/api/v1}
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-https://wxmvhqjxrseamshacynj.supabase.co}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-}
+        VITE_MAPTILER_API_KEY: ${VITE_MAPTILER_API_KEY:-}
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_started
+    restart: unless-stopped

@@ -1,0 +1,290 @@
+[
+  {
+    "_coord_note": "Address-derived approximation. Verify with live Overpass or Google Maps before production use.",
+    "id": "demo-fuel-001",
+    "name": "Navdeep HP Centre",
+    "category": "fuel",
+    "coordinates": {
+      "lat": 30.758,
+      "lon": 76.581
+    },
+    "distance_km": null,
+    "address": "Kharar-Ludhiana Road, NH 95, Rurkee Pukhta, Kurali, Punjab 140413",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-fuel-002",
+    "name": "BPCL Shree Balasundri Fuels",
+    "category": "fuel",
+    "coordinates": {
+      "lat": 30.9138,
+      "lon": 75.9413
+    },
+    "distance_km": null,
+    "address": "Sahnewal-Kohara Link Road, Jandiali, Punjab 141112",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-fuel-003",
+    "name": "BPCL COCO Kaddon",
+    "category": "fuel",
+    "coordinates": {
+      "lat": 30.83,
+      "lon": 76.08
+    },
+    "distance_km": null,
+    "address": "National Highway 95, Kaddon (Near Doraha), Ludhiana District, Punjab 141421",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-fuel-004",
+    "name": "IndianOil Gharuan Bypass Station",
+    "category": "fuel",
+    "coordinates": {
+      "lat": 30.77,
+      "lon": 76.5756
+    },
+    "distance_km": null,
+    "address": "NH 95, Morinda Bypass Road, Gharuan, Punjab 140413",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-fuel-005",
+    "name": "IndianOil Kamal Filling Station",
+    "category": "fuel",
+    "coordinates": {
+      "lat": 30.8445,
+      "lon": 76.1937
+    },
+    "distance_km": null,
+    "address": "NH 95, Ludhiana - Chandigarh NH, Samrala, Bhagwanpura, Punjab 141114",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-fuel-006",
+    "name": "Bharat Petroleum Shri Salasar Power Point",
+    "category": "fuel",
+    "coordinates": {
+      "lat": 30.896,
+      "lon": 75.868
+    },
+    "distance_km": null,
+    "address": "Link Road, near Aman House, Opp. Transport Nagar, Shivajinagar, Ludhiana, Punjab 141003",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-hospital-001",
+    "name": "Alpha Chandigarh Multispecialty Hospital",
+    "category": "hospital",
+    "coordinates": {
+      "lat": 30.772,
+      "lon": 76.573
+    },
+    "distance_km": null,
+    "address": "NH-05, Ludhiana Highway Corridor, Gharuan (Near Chandigarh University), Punjab 140413",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-hospital-002",
+    "name": "Life Care Multispecialty Hospital",
+    "category": "hospital",
+    "coordinates": {
+      "lat": 30.8746,
+      "lon": 76.0694
+    },
+    "distance_km": null,
+    "address": "NH 95 Trunk Route, Opposite Main Bus Stand, Khamanon, Punjab 141801",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-hospital-003",
+    "name": "Satguru Partap Singh (SPS) Hospital",
+    "category": "hospital",
+    "coordinates": {
+      "lat": 30.9019,
+      "lon": 75.8579
+    },
+    "distance_km": null,
+    "address": "Sherpur Chowk, G.T. Road, Ludhiana, Punjab 141003",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-hospital-004",
+    "name": "Sher Gill Multispeciality Hospital",
+    "category": "hospital",
+    "coordinates": {
+      "lat": 30.7935,
+      "lon": 76.5041
+    },
+    "distance_km": null,
+    "address": "Maharana Pratap Chowk, Near Ludhiana - Chandigarh NH, Prem Nagar, Morinda, Punjab 140101",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-hospital-005",
+    "name": "VRG Memorial Hospital",
+    "category": "hospital",
+    "coordinates": {
+      "lat": 30.8452,
+      "lon": 76.19
+    },
+    "distance_km": null,
+    "address": "National Highway 95 Bypass Corridor, Samrala, Punjab 141114",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-rest-001",
+    "name": "Hotel Florida",
+    "category": "rest_stop",
+    "coordinates": {
+      "lat": 30.7432,
+      "lon": 76.644
+    },
+    "distance_km": null,
+    "address": "Modern Citi Centre NH5, Chandigarh-Ludhiana Road, Khanpur, Kharar, Punjab 140301",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-rest-002",
+    "name": "Hotel The Merc",
+    "category": "rest_stop",
+    "coordinates": {
+      "lat": 30.738,
+      "lon": 76.629
+    },
+    "distance_km": null,
+    "address": "SCO 2 & 3, Ludhiana - Chandigarh NH, Bhago Majra, Kharar, Punjab 140301",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-restaurant-001",
+    "name": "Raja Dhaba",
+    "category": "restaurant",
+    "coordinates": {
+      "lat": 30.861,
+      "lon": 76.12
+    },
+    "distance_km": null,
+    "address": "Ludhiana-Chandigarh Highway, NH 95, Khant, Punjab 140802",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-restaurant-002",
+    "name": "Raj Royal Dhaba",
+    "category": "restaurant",
+    "coordinates": {
+      "lat": 30.858,
+      "lon": 76.135
+    },
+    "distance_km": null,
+    "address": "Ludhiana-Chandigarh Highway, NH 95, Pohlo Majra, Punjab 140802",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-restaurant-003",
+    "name": "Golden Hut Resort & Dining Hub",
+    "category": "restaurant",
+    "coordinates": {
+      "lat": 30.889,
+      "lon": 75.909
+    },
+    "distance_km": null,
+    "address": "Highway Intersection, Sahnewal Khurd, Entrance Corridor, Ludhiana, Punjab 141120",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-restaurant-004",
+    "name": "Mittran Da Dhaba",
+    "category": "restaurant",
+    "coordinates": {
+      "lat": 30.875,
+      "lon": 76.066
+    },
+    "distance_km": null,
+    "address": "National Highway 95 Intersection Route, Khamanon, Fatehgarh Sahib District, Punjab 141801",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  },
+  {
+    "_coord_note": "Address-derived approximation.",
+    "id": "demo-restaurant-005",
+    "name": "Parkash Dhaba",
+    "category": "restaurant",
+    "coordinates": {
+      "lat": 30.9,
+      "lon": 75.872
+    },
+    "distance_km": null,
+    "address": "NH 95 Trunk Access, Chandigarh Road, Labour Colony Entrance, Ludhiana, Punjab 141003",
+    "source": "demo-deepak-directory",
+    "verification_status": "unverified_coordinates",
+    "coordinate_source": "address-derived-approximation (manual estimate; not geocoded, not Overpass-sourced)",
+    "last_verified_at": null
+  }
+]

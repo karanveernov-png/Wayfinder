@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "note": "Stored demonstration route for the NH-95 Chandigarh to Ludhiana corridor. Distance, duration, and geometry are a representative, hand-approximated estimate, NOT captured from a live OSRM response (provider_validated: false). Network access to the routing provider was unavailable when this repair was performed, so a fabricated 'verified' route was NOT substituted. Run scripts/capture_demo_route.py from an environment with network access to replace this with a genuine, timestamped provider response.",
+    "highway": "NH-95",
+    "source": "demonstration-data",
+    "data_as_of": "2026-10-19",
+    "provider_validated": false
+  },
+  "origin": {
+    "query": "Chandigarh, India",
+    "display_name": "Chandigarh, Punjab, India",
+    "lat": 30.7333,
+    "lon": 76.7794
+  },
+  "destination": {
+    "query": "Ludhiana, Punjab, India",
+    "display_name": "Ludhiana, Punjab, India",
+    "lat": 30.901,
+    "lon": 75.8573
+  },
+  "distance_km": 98.3,
+  "duration_minutes": 97.0,
+  "travel_mode": "driving",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        76.7794,
+        30.7333
+      ],
+      [
+        76.7097,
+        30.7267
+      ],
+      [
+        76.6454,
+        30.7432
+      ],
+      [
+        76.5756,
+        30.77
+      ],
+      [
+        76.5041,
+        30.7935
+      ],
+      [
+        76.38,
+        30.81
+      ],
+      [
+        76.1937,
+        30.8445
+      ],
+      [
+        76.12,
+        30.861
+      ],
+      [
+        76.07,
+        30.875
+      ],
+      [
+        75.95,
+        30.9
+      ],
+      [
+        75.8573,
+        30.901
+      ]
+    ]
+  }
+}
