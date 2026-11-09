@@ -1,60 +1,12 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-.venv/
-venv/
-env/
-ENV/
-*.egg-info/
-.eggs/
-*.egg
-dist/
-build/
-
-# Testing / coverage
-.pytest_cache/
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-*.cover
-
-# Linting / type-checking
-.ruff_cache/
-.mypy_cache/
-
-# IDE
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Env files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
 .env
-.env.local
-.env.*.local
-
-# Tests
-*.pytest_cache/
-
-# Git
-.git/
+.env.*
+!.env.example
+venv/
+.venv/
+.git
 .gitignore
-
-# Docker
-.dockerignore
-Dockerfile*
-docker-compose*.yml
-
-# Scripts
-scripts/

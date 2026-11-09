@@ -1,19 +1,22 @@
-# Production-ready Python image for Cloud Run
-# Uses python:3.12-slim (~40MB base) with minimal attack surface
-FROM python:3.12-slim
+FROM python:3.11-slim
 
-# Install curl for Cloud Run health checks
-RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+# Prevent Python from writing pyc files to disc and buffering stdout/stderr
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
-# Install Python dependencies first (cached layer)
+# Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy backend code
 COPY . .
 
-# Cloud Run injects PORT env var; uvicorn binds to 0.0.0.0:$PORT
+# Cloud Run sets the PORT environment variable (default 8080)
+ENV PORT=8080
+
 EXPOSE 8080
+
+# Run uvicorn server binding to 0.0.0.0 and PORT environment variable
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
