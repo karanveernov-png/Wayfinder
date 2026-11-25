@@ -63,7 +63,6 @@
 ### Prerequisites
 - Python 3.12+
 - Node 20+
-- (Optional) Docker + Docker Compose
 
 ### Run locally (two terminals)
 
@@ -86,26 +85,20 @@ npm run dev
 
 Then open **[http://localhost:5173](http://localhost:5173)**. The frontend proxies all `/api/v1/*` requests to the backend.
 
-### Run with Docker (single command)
-
-```bash
-docker compose up --build
-```
-
-Starts the backend on `:8000` and the frontend on `:5173`. Edit `backend/.env` first to set a real `HTTP_USER_AGENT` and your Supabase credentials before going beyond localhost.
-
 ---
 
 ## Development Commands
 
 ```bash
 # From project root
-make help          # list all commands
-make test          # run all frontend + backend tests
-make build         # production frontend build
-make lint          # ruff check backend
-make docker-up     # docker compose up --build
-make docker-down   # docker compose down
+# Backend
+cd backend && python -m pytest tests/ -v        # run backend tests
+cd backend && ruff check .                      # lint backend
+
+# Frontend
+cd frontend && npm test                         # run frontend tests
+cd frontend && npm run build                    # production build
+cd frontend && npm run lint                     # lint frontend
 ```
 
 ### Test results (commit-verified)
@@ -119,22 +112,21 @@ All backend tests mock every external HTTP call via [`respx`](https://lukeneff.g
 
 ---
 
-## Deployment to Google Cloud Run
+## Deployment
 
-Both services are containerized and ready for Cloud Run. Cloud Run provides:
-- **Free tier**: 2M requests/month, 360M vCPU-seconds, 180K GiB-seconds
-- **Auto-scaling to zero** (no cold billing)
-- **Built-in HTTPS + custom domains**
-- **Automatic PORT injection** (containers receive `$PORT`)
+The project is deployed across two hosting platforms:
+
+- **Backend** → [SnapDeploy](https://snapdeploy.com) (managed container hosting)
+- **Frontend** → [Vercel](https://vercel.com) (static + serverless)
 
 ### Architecture for production
 
 ```
-User Browser ──HTTPS──► Cloud Run (Frontend Service)
+User Browser ──HTTPS──► Vercel (Frontend - static React SPA)
                          ▲
                          │ fetches /api/v1/*
                          ▼
-              Cloud Run (Backend Service)
+              SnapDeploy (Backend - FastAPI)
                          │
               ┌──────────┼──────────┐
               ▼          ▼          ▼
@@ -148,108 +140,64 @@ User Browser ──HTTPS──► Cloud Run (Frontend Service)
 
 ---
 
-### Prerequisites
+### Backend — SnapDeploy
 
-```bash
-# Install gcloud CLI and set up
-gcloud auth login
-gcloud config set project YOUR_PROJECT_ID
-gcloud auth configure-docker
+The backend is a FastAPI service (Python 3.12) deployed to SnapDeploy as a container. SnapDeploy provides:
 
-# Enable required APIs
-gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
-```
+- **Zero-downtime deployments** on git push
+- **Automatic HTTPS + custom domain**
+- **Managed scaling** (no cold start)
+- **Automatic PORT injection** (containers receive `$PORT`)
 
----
+**Deploy steps:**
 
-### 1. Create Artifact Registry Repository
+1. Push the `backend/` directory to your SnapDeploy git repository (or configure the SnapDeploy panel to point at `backend/`).
+2. Set the following environment variables in the SnapDeploy dashboard:
 
-```bash
-gcloud artifacts repositories create waymark \
-  --location=us-central1 \
-  --repository-format=docker
-```
+| Variable | Required | Notes |
+|----------|----------|-------|
+| `APP_ENV` | ✅ | `production` |
+| `PORT` | ✅ | `8000` (SnapDeploy injects this automatically) |
+| `HTTP_USER_AGENT` | ✅ | Real email/project URL (Nominatim policy) |
+| `SUPABASE_URL` | ✅ | Your Supabase project URL |
+| `SUPABASE_ANON_KEY` | ✅ | Supabase anon/publishable key |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Supabase service role key |
+| `SUPABASE_JWT_SECRET` | ✅ | Copy from Supabase Dashboard → Settings → API → JWT Settings |
+| `CORS_ORIGINS` | ✅ | Your Vercel frontend URL (e.g. `https://your-app.vercel.app`) |
+| `GROQ_API_KEY` | Optional | For AI trip intent feature |
 
----
-
-### 2. Build & Deploy Backend
-
-```bash
-cd backend
-
-# Build and push image
-gcloud builds submit --tag us-central1-docker.pkg.dev/YOUR_PROJECT_ID/waymark/backend:latest .
-
-# Deploy to Cloud Run
-gcloud run deploy waymark-backend \
-  --image=us-central1-docker.pkg.dev/YOUR_PROJECT_ID/waymark/backend:latest \
-  --platform=managed \
-  --region=us-central1 \
-  --allow-unauthenticated \
-  --port=8000 \
-  --memory=512Mi \
-  --cpu=1 \
-  --min-instances=0 \
-  --max-instances=10 \
-  --set-env-vars="APP_ENV=production,HTTP_USER_AGENT=Waymark/1.0 (your-email@domain.com),SUPABASE_URL=https://your-project.supabase.co,SUPABASE_ANON_KEY=your-anon-key,SUPABASE_SERVICE_ROLE_KEY=your-service-key,SUPABASE_JWT_SECRET=your-jwt-secret,CORS_ORIGINS=https://your-frontend-xxxx-uc.a.run.app"
-```
-
-**Note**: After frontend deploy, update `CORS_ORIGINS` with the actual frontend URL:
-```bash
-gcloud run services update waymark-backend \
-  --region=us-central1 \
-  --set-env-vars="CORS_ORIGINS=https://YOUR_FRONTEND_URL.a.run.app"
-```
+3. After deployment, note your backend public URL (e.g. `https://your-backend.snapdeploy.app`).
 
 ---
 
-### 3. Build & Deploy Frontend
+### Frontend — Vercel
 
-```bash
-cd frontend
+The frontend is a Vite + React SPA deployed to Vercel. `frontend/vercel.json` already configures the build, output directory, SPA rewrites, and caching headers.
 
-# Build and push image (pass build args for Vite env vars)
-gcloud builds submit --tag us-central1-docker.pkg.dev/YOUR_PROJECT_ID/waymark/frontend:latest \
-  --substitutions=_VITE_API_BASE_URL=https://waymark-backend-xxxx-uc.a.run.app/api/v1,_VITE_SUPABASE_URL=https://your-project.supabase.co,_VITE_SUPABASE_ANON_KEY=your-anon-key,_VITE_MAPTILER_API_KEY=your-maptiler-key .
+**Deploy steps:**
 
-# Deploy to Cloud Run
-gcloud run deploy waymark-frontend \
-  --image=us-central1-docker.pkg.dev/YOUR_PROJECT_ID/waymark/frontend:latest \
-  --platform=managed \
-  --region=us-central1 \
-  --allow-unauthenticated \
-  --port=8080 \
-  --memory=256Mi \
-  --cpu=1 \
-  --min-instances=0 \
-  --max-instances=10
-```
+1. Push the `frontend/` directory to a Vercel-connected git repository (or use `vercel --prod` from the `frontend/` directory).
+2. Set the following environment variables in Vercel → Project → Settings → Environment Variables:
 
-**Important**: Replace `waymark-backend-xxxx-uc.a.run.app` with your actual backend Cloud Run URL from step 2.
+| Variable | Required | Notes |
+|----------|----------|-------|
+| `VITE_API_BASE_URL` | ✅ | Your SnapDeploy backend URL + `/api/v1` |
+| `VITE_SUPABASE_URL` | ✅ | Your Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | ✅ | Supabase anon/publishable key |
+| `VITE_MAPTILER_API_KEY` | ✅ | MapTiler API key |
+
+> **Note**: Vite bakes `VITE_*` variables in at **build time**. After changing any of them, trigger a fresh deployment (redeploy) so the new values take effect.
+
+3. After deployment, note your frontend public URL (e.g. `https://your-app.vercel.app`) and set it as `CORS_ORIGINS` on the backend (SnapDeploy dashboard).
 
 ---
 
-### 4. Verify & Connect
+### Verify & Connect
 
-1. Open your frontend URL (e.g., `https://waymark-frontend-xxxx-uc.a.run.app`)
-2. Test route planning: enter origin/destination → "Plan journey"
-3. Test share: click "Open in Google Maps" → opens Google Maps with route
-4. Test auth: sign up → save a journey → verify in Supabase dashboard
-
----
-
-### Environment Variables Reference
-
-| Variable | Required | Where | Notes |
-|----------|----------|-------|-------|
-| `SUPABASE_JWT_SECRET` | ✅ | Backend | Copy from Supabase Dashboard → Settings → API → JWT Settings |
-| `HTTP_USER_AGENT` | ✅ | Backend | Real email/project URL (Nominatim policy) |
-| `CORS_ORIGINS` | ✅ | Backend | Frontend Cloud Run URL |
-| `VITE_API_BASE_URL` | ✅ | Frontend (build arg) | Backend Cloud Run URL + `/api/v1` |
-| `VITE_SUPABASE_URL` | ✅ | Frontend (build arg) | Your Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | ✅ | Frontend (build arg) | Supabase anon/publishable key |
-| `VITE_MAPTILER_API_KEY` | ✅ | Frontend (build arg) | MapTiler API key |
-| `GROQ_API_KEY` | Optional | Backend | For AI trip intent feature |
+1. Open your Vercel frontend URL.
+2. Test route planning: enter origin/destination → "Plan journey".
+3. Test share: click "Open in Google Maps" → opens Google Maps with route.
+4. Test auth: sign up → save a journey → verify in Supabase dashboard.
 
 ---
 
@@ -286,7 +234,6 @@ waymark/
 │   ├── docs/API_CONTRACT.md      # authoritative request/response contract
 │   ├── scripts/capture_demo_route.py   # generates fresh demo route from live providers
 │   ├── supabase/schema.sql       # run once to enable saved journeys
-│   ├── Dockerfile                # Cloud Run compatible (uses $PORT)
 │   └── tests/                    # pytest suite (mocked)
 │
 ├── frontend/                      # Waymark UI
@@ -299,13 +246,11 @@ waymark/
 │   │   ├── context/              # JourneyContext, AuthContext
 │   │   └── lib/                  # api.js, format.js, geo.js, storage.js
 │   ├── public/                   # favicons, PWA icons
-│   ├── Dockerfile                # Cloud Run compatible (nginx + PORT)
-│   ├── entrypoint.sh             # generates nginx.conf with $PORT
+│   ├── vercel.json               # Vercel deployment config
 │   └── tests/                    # node --test suite
 │
-├── docker-compose.yml            # local development only
-├── .env.production.template      # env var template
-└── DEPLOYMENT.md                 # detailed deployment notes
+├── .gitignore                    # git ignore rules
+└── README.md                     # this file
 ```
 
 ---
